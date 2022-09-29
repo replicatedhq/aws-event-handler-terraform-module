@@ -32,18 +32,35 @@ resource "aws_lambda_function" "handler_lambda" {
 
   source_code_hash = filebase64sha256("${path.module}/tmp/handler_function.zip")
 
-  runtime = var.handler_runtime
+  runtime                        = var.handler_runtime
+  reserved_concurrent_executions = 0
+
+  tracing_config {
+    mode = "Active"
   }
 
-  tags = { 
+  dead_letter_config {
+    target_arn = var.dead_letter_queue_arn == "" ? null : var.dead_letter_queue_arn
+  }
+
+  vpc_config {
+    subnet_ids         = var.subnet_ids
+    security_group_ids = var.security_group_ids
+  }
+
+  tags = {
     owner      = var.owner
     managed-by = "terraform"
   }
 }
 
-data "archive_file" "handler_function_zip" {
-  type        = "zip"
-  source_dir  = "${path.root}${var.handler_path}"
-  ouptut_path = "${path.module}/tmp/handler_function.zip"
-}
+resource "aws_sqs_queue" "event-sqs-queue" {
+  name = "event-handler-${var.name}"
 
+  kms_master_key_id = var.kms_master_key_id == "" ? null : var.kms_master_key_id
+
+  tags = {
+    owner      = var.owner
+    managed-by = "terraform"
+  }
+}
