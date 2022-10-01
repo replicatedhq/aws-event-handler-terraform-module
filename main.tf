@@ -1,7 +1,7 @@
 data "archive_file" "handler_function_zip" {
   type        = "zip"
   source_dir  = "${path.root}${var.handler_path}"
-  ouptut_path = "${path.module}/tmp/handler_function.zip"
+  output_path = "${path.module}/tmp/handler_function.zip"
 }
 
 resource "aws_iam_role" "event_handler_lambda_iam_role" {
