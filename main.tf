@@ -30,7 +30,7 @@ resource "aws_lambda_function" "handler_lambda" {
   role          = aws_iam_role.event_handler_lambda_iam_role.arn
   handler       = var.handler_entrypoint
 
-  source_code_hash = filebase64sha256("${path.module}/tmp/handler_function.zip")
+  source_code_hash = filebase64sha256("${path.root}/tmp/handler_function.zip")
 
   runtime                        = var.handler_runtime
   reserved_concurrent_executions = 0
