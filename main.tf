@@ -44,7 +44,7 @@ resource "aws_lambda_function" "handler_lambda" {
     for_each = var.dead_letter_queue_arn != null ? toset([1]) : toset([])
 
     content {
-      target_arn = var.dead_letter_config_target
+      target_arn = var.dead_letter_queue_arn
     }
   }
 
