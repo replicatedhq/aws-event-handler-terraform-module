@@ -39,8 +39,13 @@ resource "aws_lambda_function" "handler_lambda" {
     mode = "Active"
   }
 
-  dead_letter_config {
-    target_arn = var.dead_letter_queue_arn == "" ? null : var.dead_letter_queue_arn
+  dynamic "dead_letter_config" {
+
+    for_each = var.dead_letter_queue_arn != null ? toset([1]) : toset([])
+
+    content {
+      target_arn = var.dead_letter_queue_arn
+    }
   }
 
   vpc_config {
