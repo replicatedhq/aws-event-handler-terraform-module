@@ -1,6 +1,6 @@
 data "archive_file" "handler_function_zip" {
   type        = "zip"
-  source_dir  = "${var.handler_path}"
+  source_dir  = var.handler_path
   output_path = "${path.root}handler_function.zip"
 }
 
