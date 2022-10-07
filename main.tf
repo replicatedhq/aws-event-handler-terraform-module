@@ -25,7 +25,7 @@ EOF
 }
 
 resource "aws_lambda_function" "handler_lambda" {
-  filename      = "handler_function.zip"
+  filename      = "${path.module}/tmp/handler_function.zip"
   function_name = "handler_lambda-${var.name}"
   role          = aws_iam_role.event_handler_lambda_iam_role.arn
   handler       = var.handler_entrypoint
