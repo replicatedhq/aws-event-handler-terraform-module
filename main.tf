@@ -1,7 +1,7 @@
 data "archive_file" "handler_function_zip" {
   type        = "zip"
-  source_dir  = "${path.root}${var.handler_path}"
-  output_path = "${path.module}/tmp/handler_function.zip"
+  source_dir  = "${var.handler_path}"
+  output_path = "handler_function.zip"
 }
 
 resource "aws_iam_role" "event_handler_lambda_iam_role" {
@@ -25,7 +25,7 @@ EOF
 }
 
 resource "aws_lambda_function" "handler_lambda" {
-  filename      = "${path.module}/tmp/handler_function.zip"
+  filename      = "handler_function.zip"
   function_name = "handler_lambda-${var.name}"
   role          = aws_iam_role.event_handler_lambda_iam_role.arn
   handler       = var.handler_entrypoint
