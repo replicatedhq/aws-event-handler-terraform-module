@@ -67,7 +67,7 @@ resource "aws_lambda_function" "handler_lambda" {
   }
 }
 
-resource "aws_sqs_queue" "event-sqs-queue" {
+resource "aws_sqs_queue" "event_sqs_queue" {
   name = "event-handler-${var.name}"
 
   kms_master_key_id = var.kms_master_key_id == "" ? null : var.kms_master_key_id
@@ -76,4 +76,9 @@ resource "aws_sqs_queue" "event-sqs-queue" {
     owner      = var.owner
     managed-by = "terraform"
   }
+}
+
+resource "aws_event_source_mapping" "lambda_sqs_mapping" {
+  event_source_arn = aws_sqs_queue.event_sqs_queue
+  function_name    = aws_lambda_function.handler_lambda.arn
 }
