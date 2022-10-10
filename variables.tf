@@ -39,8 +39,9 @@ variable "subnet_ids" {
   description = "List of subnet IDs associated with the lambda function"
 }
 
-variable "dead_letter_queue_arn" {
-  type        = string
-  default     = ""
-  description = "Dead letter queue for events that failed to process from the lambda function"
+variable "dead_letter_config" {
+  type = object({
+    target_arn = string
+  })
+  default = null
 }
