@@ -49,11 +49,10 @@ resource "aws_lambda_function" "handler_lambda" {
   }
 
   dynamic "dead_letter_config" {
-
-    for_each = var.dead_letter_queue_arn != null ? toset([1]) : toset([])
+    for_each = var.dead_letter_config == null ? [] : [var.dead_letter_config]
 
     content {
-      target_arn = var.dead_letter_queue_arn
+      target_arn = dead_letter_config.value.target_arn
     }
   }
 
