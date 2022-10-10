@@ -1,7 +1,16 @@
+# Resource for archive_file to depend on to force archiving during applies
+resource null_resource trigger {
+  triggers = {
+    timestamp = timestamp()
+  }
+}
+
 data "archive_file" "handler_function_zip" {
   type        = "zip"
   source_dir  = var.handler_path
   output_path = "${path.root}/handler_function.zip"
+
+  depends_on = [resource.null_resource.trigger]
 }
 
 resource "aws_iam_role" "event_handler_lambda_iam_role" {
