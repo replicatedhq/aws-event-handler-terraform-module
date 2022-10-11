@@ -1,5 +1,5 @@
 # Resource for archive_file to depend on to force archiving during applies
-resource null_resource trigger {
+resource "null_resource" "trigger" {
   triggers = {
     timestamp = timestamp()
   }
@@ -78,7 +78,7 @@ resource "aws_sqs_queue" "event_sqs_queue" {
   }
 }
 
-resource "aws_event_source_mapping" "lambda_sqs_mapping" {
+resource "aws_lambda_event_source_mapping" "lambda_sqs_mapping" {
   event_source_arn = aws_sqs_queue.event_sqs_queue
   function_name    = aws_lambda_function.handler_lambda.arn
 }
