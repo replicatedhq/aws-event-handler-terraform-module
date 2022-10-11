@@ -12,6 +12,7 @@
 |------|---------|
 | <a name="provider_archive"></a> [archive](#provider\_archive) | ~> 2.2.0 |
 | <a name="provider_aws"></a> [aws](#provider\_aws) | 4.30.0 |
+| <a name="provider_null"></a> [null](#provider\_null) | n/a |
 
 ## Modules
 
@@ -22,15 +23,17 @@ No modules.
 | Name | Type |
 |------|------|
 | [aws_iam_role.event_handler_lambda_iam_role](https://registry.terraform.io/providers/hashicorp/aws/4.30.0/docs/resources/iam_role) | resource |
+| [aws_lambda_event_source_mapping.lambda_sqs_mapping](https://registry.terraform.io/providers/hashicorp/aws/4.30.0/docs/resources/lambda_event_source_mapping) | resource |
 | [aws_lambda_function.handler_lambda](https://registry.terraform.io/providers/hashicorp/aws/4.30.0/docs/resources/lambda_function) | resource |
-| [aws_sqs_queue.event-sqs-queue](https://registry.terraform.io/providers/hashicorp/aws/4.30.0/docs/resources/sqs_queue) | resource |
+| [aws_sqs_queue.event_sqs_queue](https://registry.terraform.io/providers/hashicorp/aws/4.30.0/docs/resources/sqs_queue) | resource |
+| [null_resource.trigger](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [archive_file.handler_function_zip](https://registry.terraform.io/providers/hashicorp/archive/latest/docs/data-sources/file) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_dead_letter_queue_arn"></a> [dead\_letter\_queue\_arn](#input\_dead\_letter\_queue\_arn) | Dead letter queue for events that failed to process from the lambda function | `string` | `""` | no |
+| <a name="input_dead_letter_config"></a> [dead\_letter\_config](#input\_dead\_letter\_config) | n/a | <pre>object({<br>    target_arn = string<br>  })</pre> | `null` | no |
 | <a name="input_handler_entrypoint"></a> [handler\_entrypoint](#input\_handler\_entrypoint) | Function entrypoint for the handler | `string` | n/a | yes |
 | <a name="input_handler_path"></a> [handler\_path](#input\_handler\_path) | Path to the script to be run with lambda | `string` | n/a | yes |
 | <a name="input_handler_runtime"></a> [handler\_runtime](#input\_handler\_runtime) | Runtime that the handler function utilizes. e.g. python37, node16, etc | `string` | n/a | yes |
@@ -42,4 +45,7 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_file_archive_path"></a> [file\_archive\_path](#output\_file\_archive\_path) | n/a |
+| <a name="output_lambda_path"></a> [lambda\_path](#output\_lambda\_path) | n/a |

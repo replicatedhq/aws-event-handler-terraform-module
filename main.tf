@@ -1,5 +1,5 @@
 # Resource for archive_file to depend on to force archiving during applies
-resource null_resource trigger {
+resource "null_resource" "trigger" {
   triggers = {
     timestamp = timestamp()
   }
