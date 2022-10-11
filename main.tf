@@ -20,13 +20,37 @@ resource "aws_iam_role" "event_handler_lambda_iam_role" {
 {
   "Version": "2012-10-17",
   "Statement": [
-    {
+    {   
       "Action": "sts:AssumeRole",
       "Principal": {
         "Service": "lambda.amazonaws.com"
-      },
+      },  
       "Effect": "Allow",
       "Sid": ""
+    },
+    {
+        "Sid": "",
+        "Effect": "Allow",
+        "Action": "lambda:InvokeFunction",
+        "Resource": "${aws_lambda_function.handler_lambda.arn}"
+    },
+    {
+        "Sid": "",
+        "Effect": "Allow",
+        "Action": [
+            "logs:PutLogEvents",
+            "logs:CreateLogStream",
+            "logs:CreateLogGroup"
+        ],
+        "Resource": "*"
+    },
+    {
+        "Sid": "",
+        "Effect": "Allow",
+        "Action": [
+            "sqs:*"
+        ],
+        "Resource": "${aws_sqs_queue.event_sqs_queue.arn}"
     }
   ]
 }
