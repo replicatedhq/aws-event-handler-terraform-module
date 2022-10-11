@@ -20,11 +20,11 @@ resource "aws_iam_role" "event_handler_lambda_iam_role" {
 {
   "Version": "2012-10-17",
   "Statement": [
-    {   
+    {
       "Action": "sts:AssumeRole",
       "Principal": {
         "Service": "lambda.amazonaws.com"
-      },  
+      },
       "Effect": "Allow",
       "Sid": ""
     },
