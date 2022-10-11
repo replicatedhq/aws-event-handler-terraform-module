@@ -32,7 +32,7 @@ resource "aws_iam_role" "event_handler_lambda_iam_role" {
         "Sid": "",
         "Effect": "Allow",
         "Action": "lambda:InvokeFunction",
-        "Resource": "${aws_lambda_function.handler_lambda.arn}"
+        "Resource": "*"
     },
     {
         "Sid": "",
@@ -55,6 +55,8 @@ resource "aws_iam_role" "event_handler_lambda_iam_role" {
   ]
 }
 EOF
+
+  depends_on = [resource.aws_sqs_queue.event_sqs_queue]
 }
 
 resource "aws_lambda_function" "handler_lambda" {
