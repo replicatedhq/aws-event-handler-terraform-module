@@ -37,13 +37,11 @@ resource "aws_iam_role" "event_handler_lambda_iam_role" {
       Version = "2012-10-17"
       Statement = [
         {
-          "Sid" : "",
           "Effect" : "Allow",
           "Action" : "lambda:InvokeFunction",
           "Resource" : "*"
         },
         {
-          "Sid" : "",
           "Effect" : "Allow",
           "Action" : [
             "logs:PutLogEvents",
@@ -53,7 +51,6 @@ resource "aws_iam_role" "event_handler_lambda_iam_role" {
           "Resource" : "*"
         },
         {
-          "Sid" : "",
           "Effect" : "Allow",
           "Action" : [
             "sqs:*"
@@ -115,4 +112,6 @@ resource "aws_sqs_queue" "event_sqs_queue" {
 resource "aws_lambda_event_source_mapping" "lambda_sqs_mapping" {
   event_source_arn = aws_sqs_queue.event_sqs_queue.arn
   function_name    = aws_lambda_function.handler_lambda.arn
+
+  depends_on = [resource.aws_lambda_function.handler_lambda]
 }
