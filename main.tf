@@ -54,7 +54,7 @@ resource "aws_iam_role_policy" "event_handler_lambda_iam_role_policy" {
           "logs:CreateLogStream",
           "logs:CreateLogGroup"
         ],
-        "Resource" : "*"
+        "Resource" : "${aws_lambda_function.handler_lambda.arn}"
       },
       {
         "Effect" : "Allow",
@@ -65,6 +65,8 @@ resource "aws_iam_role_policy" "event_handler_lambda_iam_role_policy" {
       }
     ]
   })
+
+  depends_on = [resource.aws_lambda_function.handler_lambda, resorce.aws_sqs_queue.event_sqs_queue]
 }
 
 resource "aws_lambda_function" "handler_lambda" {
