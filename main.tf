@@ -45,7 +45,7 @@ resource "aws_iam_role_policy" "event_handler_lambda_iam_role_policy" {
       {
         "Effect" : "Allow",
         "Action" : "lambda:InvokeFunction",
-        "Resource" : "*"
+        "Resource" : "${aws_lambda_function.handler_lambda.arn}"
       },
       {
         "Effect" : "Allow",
@@ -54,7 +54,7 @@ resource "aws_iam_role_policy" "event_handler_lambda_iam_role_policy" {
           "logs:CreateLogStream",
           "logs:CreateLogGroup"
         ],
-        "Resource" : "${aws_lambda_function.handler_lambda.arn}"
+        "Resource" : "*"
       },
       {
         "Effect" : "Allow",
