@@ -13,6 +13,8 @@ data "archive_file" "handler_function_zip" {
   depends_on = [resource.null_resource.trigger]
 }
 
+
+
 resource "aws_iam_role" "event_handler_lambda_iam_role" {
   name = "event_handler_lambda_iam_role-${var.name}"
 
@@ -27,34 +29,42 @@ resource "aws_iam_role" "event_handler_lambda_iam_role" {
       },
       "Effect": "Allow",
       "Sid": ""
-    },
-    {
-        "Sid": "",
-        "Effect": "Allow",
-        "Action": "lambda:InvokeFunction",
-        "Resource": "*"
-    },
-    {
-        "Sid": "",
-        "Effect": "Allow",
-        "Action": [
-            "logs:PutLogEvents",
-            "logs:CreateLogStream",
-            "logs:CreateLogGroup"
-        ],
-        "Resource": "*"
-    },
-    {
-        "Sid": "",
-        "Effect": "Allow",
-        "Action": [
-            "sqs:*"
-        ],
-        "Resource": "${aws_sqs_queue.event_sqs_queue.arn}"
     }
   ]
 }
 EOF
+
+  inline_policy {
+    policy = jsonencode({
+      Version = "2012-10-17"
+      Statement = [
+        {
+          "Sid" : "",
+          "Effect" : "Allow",
+          "Action" : "lambda:InvokeFunction",
+          "Resource" : "*"
+        },
+        {
+          "Sid" : "",
+          "Effect" : "Allow",
+          "Action" : [
+            "logs:PutLogEvents",
+            "logs:CreateLogStream",
+            "logs:CreateLogGroup"
+          ],
+          "Resource" : "*"
+        },
+        {
+          "Sid" : "",
+          "Effect" : "Allow",
+          "Action" : [
+            "sqs:*"
+          ],
+          "Resource" : "${aws_sqs_queue.event_sqs_queue.arn}"
+        }
+      ]
+    })
+  }
 
   depends_on = [resource.aws_sqs_queue.event_sqs_queue]
 }
