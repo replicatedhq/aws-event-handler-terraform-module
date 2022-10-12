@@ -18,34 +18,30 @@ data "archive_file" "handler_function_zip" {
 resource "aws_iam_role" "event_handler_lambda_iam_role" {
   name = "event_handler_lambda_iam_role-${var.name}"
 
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": "sts:AssumeRole",
-      "Principal": {
-        "Service": "lambda.amazonaws.com"
-      },
-      "Effect": "Allow",
-      "Sid": ""
-    }
-  ]
-}
-EOF
+  assume_role_policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Action" : "sts:AssumeRole",
+        "Principal" : {
+          "Service" : "lambda.amazonaws.com"
+        },
+        "Effect" : "Allow",
+        "Sid" : ""
+      }
+    ]
+  })
 
   inline_policy {
     policy = jsonencode({
       Version = "2012-10-17"
       Statement = [
         {
-          "Sid" : "",
           "Effect" : "Allow",
           "Action" : "lambda:InvokeFunction",
           "Resource" : "*"
         },
         {
-          "Sid" : "",
           "Effect" : "Allow",
           "Action" : [
             "logs:PutLogEvents",
@@ -55,7 +51,6 @@ EOF
           "Resource" : "*"
         },
         {
-          "Sid" : "",
           "Effect" : "Allow",
           "Action" : [
             "sqs:*"
@@ -117,4 +112,6 @@ resource "aws_sqs_queue" "event_sqs_queue" {
 resource "aws_lambda_event_source_mapping" "lambda_sqs_mapping" {
   event_source_arn = aws_sqs_queue.event_sqs_queue.arn
   function_name    = aws_lambda_function.handler_lambda.arn
+
+  depends_on = [resource.aws_lambda_function.handler_lambda]
 }
