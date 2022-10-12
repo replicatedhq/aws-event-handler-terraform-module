@@ -32,36 +32,39 @@ resource "aws_iam_role" "event_handler_lambda_iam_role" {
     ]
   })
 
-  inline_policy {
-    policy = jsonencode({
-      Version = "2012-10-17"
-      Statement = [
-        {
-          "Effect" : "Allow",
-          "Action" : "lambda:InvokeFunction",
-          "Resource" : "*"
-        },
-        {
-          "Effect" : "Allow",
-          "Action" : [
-            "logs:PutLogEvents",
-            "logs:CreateLogStream",
-            "logs:CreateLogGroup"
-          ],
-          "Resource" : "*"
-        },
-        {
-          "Effect" : "Allow",
-          "Action" : [
-            "sqs:*"
-          ],
-          "Resource" : "${aws_sqs_queue.event_sqs_queue.arn}"
-        }
-      ]
-    })
-  }
-
   depends_on = [resource.aws_sqs_queue.event_sqs_queue]
+}
+
+resource "aws_iam_role_policy" "event_handler_lambda_iam_role_policy" {
+  name = "event_handler_lambda_iam_role_policy-${var.name}"
+  role = aws_iam_role.event_handler_lambda_iam_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        "Effect" : "Allow",
+        "Action" : "lambda:InvokeFunction",
+        "Resource" : "*"
+      },
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "logs:PutLogEvents",
+          "logs:CreateLogStream",
+          "logs:CreateLogGroup"
+        ],
+        "Resource" : "*"
+      },
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "sqs:*"
+        ],
+        "Resource" : "${aws_sqs_queue.event_sqs_queue.arn}"
+      }
+    ]
+  })
 }
 
 resource "aws_lambda_function" "handler_lambda" {

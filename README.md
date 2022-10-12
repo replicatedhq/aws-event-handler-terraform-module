@@ -24,6 +24,7 @@ No modules.
 | Name | Type |
 |------|------|
 | [aws_iam_role.event_handler_lambda_iam_role](https://registry.terraform.io/providers/hashicorp/aws/4.30.0/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy.event_handler_lambda_iam_role_policy](https://registry.terraform.io/providers/hashicorp/aws/4.30.0/docs/resources/iam_role_policy) | resource |
 | [aws_lambda_event_source_mapping.lambda_sqs_mapping](https://registry.terraform.io/providers/hashicorp/aws/4.30.0/docs/resources/lambda_event_source_mapping) | resource |
 | [aws_lambda_function.handler_lambda](https://registry.terraform.io/providers/hashicorp/aws/4.30.0/docs/resources/lambda_function) | resource |
 | [aws_sqs_queue.event_sqs_queue](https://registry.terraform.io/providers/hashicorp/aws/4.30.0/docs/resources/sqs_queue) | resource |
