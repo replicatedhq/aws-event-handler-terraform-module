@@ -45,3 +45,9 @@ variable "dead_letter_config" {
   })
   default = null
 }
+
+variable "lambda_concurrent_executions" {
+  type        = number
+  default     = -1
+  description = "Limit the number of concurrent executions of the lambda function. -1 removes any concurrency limitations"
+}

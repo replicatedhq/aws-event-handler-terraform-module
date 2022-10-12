@@ -45,7 +45,7 @@ resource "aws_iam_role_policy" "event_handler_lambda_iam_role_policy" {
       {
         "Effect" : "Allow",
         "Action" : "lambda:InvokeFunction",
-        "Resource" : "${aws_lambda_function.handler_lambda.arn}"
+        "Resource" : aws_lambda_function.handler_lambda.arn
       },
       {
         "Effect" : "Allow",
@@ -61,7 +61,7 @@ resource "aws_iam_role_policy" "event_handler_lambda_iam_role_policy" {
         "Action" : [
           "sqs:*"
         ],
-        "Resource" : "${aws_sqs_queue.event_sqs_queue.arn}"
+        "Resource" : aws_sqs_queue.event_sqs_queue.arn
       }
     ]
   })
@@ -78,7 +78,7 @@ resource "aws_lambda_function" "handler_lambda" {
   source_code_hash = data.archive_file.handler_function_zip.output_base64sha256
 
   runtime                        = var.handler_runtime
-  reserved_concurrent_executions = 0
+  reserved_concurrent_executions = var.lambda_concurrent_executions
 
   tracing_config {
     mode = "Active"
