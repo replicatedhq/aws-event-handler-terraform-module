@@ -43,12 +43,10 @@ No modules.
 | <a name="input_lambda_concurrent_executions"></a> [lambda\_concurrent\_executions](#input\_lambda\_concurrent\_executions) | Limit the number of concurrent executions of the lambda function. -1 removes any concurrency limitations | `number` | `-1` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name of the service | `string` | n/a | yes |
 | <a name="input_owner"></a> [owner](#input\_owner) | Owner of the service | `string` | n/a | yes |
-| <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | List of security group IDs associated with the Lambda function. | `list(string)` | n/a | yes |
-| <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | List of subnet IDs associated with the lambda function | `list(string)` | n/a | yes |
+| <a name="input_vpc_config"></a> [vpc\_config](#input\_vpc\_config) | n/a | <pre>object({<br>    security_group_ids = list(string)<br>    subnet_ids         = list(string)<br>  })</pre> | `null` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_file_archive_path"></a> [file\_archive\_path](#output\_file\_archive\_path) | n/a |
-| <a name="output_lambda_path"></a> [lambda\_path](#output\_lambda\_path) | n/a |
+| <a name="output_lambda_execution_role"></a> [lambda\_execution\_role](#output\_lambda\_execution\_role) | n/a |
