@@ -7,7 +7,7 @@ resource "null_resource" "trigger" {
 
 data "archive_file" "handler_function_zip" {
   type        = "zip"
-  source_dir  = var.handler_path
+  source_file = var.handler_filepath
   output_path = "${path.root}/handler_function.zip"
 
   depends_on = [resource.null_resource.trigger]
