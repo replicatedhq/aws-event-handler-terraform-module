@@ -37,7 +37,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_dead_letter_config"></a> [dead\_letter\_config](#input\_dead\_letter\_config) | n/a | <pre>object({<br>    target_arn = string<br>  })</pre> | `null` | no |
 | <a name="input_handler_entrypoint"></a> [handler\_entrypoint](#input\_handler\_entrypoint) | Function entrypoint for the handler | `string` | n/a | yes |
-| <a name="input_handler_path"></a> [handler\_path](#input\_handler\_path) | Path to the script to be run with lambda | `string` | n/a | yes |
+| <a name="input_handler_filepath"></a> [handler\_filepath](#input\_handler\_filepath) | Path to the script to be run with lambda | `string` | n/a | yes |
 | <a name="input_handler_runtime"></a> [handler\_runtime](#input\_handler\_runtime) | Runtime that the handler function utilizes. e.g. python37, node16, etc | `string` | n/a | yes |
 | <a name="input_kms_master_key_id"></a> [kms\_master\_key\_id](#input\_kms\_master\_key\_id) | KMS key for encrypting SQS queue | `string` | `""` | no |
 | <a name="input_lambda_concurrent_executions"></a> [lambda\_concurrent\_executions](#input\_lambda\_concurrent\_executions) | Limit the number of concurrent executions of the lambda function. -1 removes any concurrency limitations | `number` | `-1` | no |
