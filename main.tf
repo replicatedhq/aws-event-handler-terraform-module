@@ -7,7 +7,7 @@ resource "null_resource" "trigger" {
 
 data "archive_file" "handler_function_zip" {
   type        = "zip"
-  source_dir  = var.handler_path
+  source_file = var.handler_filepath
   output_path = "${path.root}/handler_function.zip"
 
   depends_on = [resource.null_resource.trigger]
@@ -93,8 +93,12 @@ resource "aws_lambda_function" "handler_lambda" {
   }
 
   vpc_config {
-    subnet_ids         = var.subnet_ids
-    security_group_ids = var.security_group_ids
+    for_each = var.vpc_config == null ? [] : [var.vpc_config]
+
+    content {
+      subnet_ids         = vpc_config.value.subnet_ids
+      security_group_ids = vpc_config.value.security_group_ids
+    }
   }
 
   tags = {

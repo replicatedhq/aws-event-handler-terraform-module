@@ -8,7 +8,7 @@ variable "owner" {
   description = "Owner of the service"
 }
 
-variable "handler_path" {
+variable "handler_filepath" {
   type        = string
   description = "Path to the script to be run with lambda "
 }
@@ -29,14 +29,12 @@ variable "kms_master_key_id" {
   description = "KMS key for encrypting SQS queue"
 }
 
-variable "security_group_ids" {
-  type        = list(string)
-  description = "List of security group IDs associated with the Lambda function."
-}
-
-variable "subnet_ids" {
-  type        = list(string)
-  description = "List of subnet IDs associated with the lambda function"
+variable "vpc_config" {
+  type = object({
+    security_group_ids = list(string)
+    subnet_ids         = list(string)
+  })
+  default = null
 }
 
 variable "dead_letter_config" {
