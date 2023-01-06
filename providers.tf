@@ -1,3 +1,4 @@
 provider "aws" {
-  # Configuration options
+  source = "hashicorp/aws"
+  region = var.aws_provider_region
 }
