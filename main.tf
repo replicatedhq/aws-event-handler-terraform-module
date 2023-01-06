@@ -92,7 +92,7 @@ resource "aws_lambda_function" "handler_lambda" {
     }
   }
 
-  vpc_config {
+  dynamic "vpc_config" {
     for_each = var.vpc_config == null ? [] : [var.vpc_config]
 
     content {
