@@ -49,3 +49,8 @@ variable "lambda_concurrent_executions" {
   default     = -1
   description = "Limit the number of concurrent executions of the lambda function. -1 removes any concurrency limitations"
 }
+
+variable "aws_provider_region" {
+  type        = string
+  description = "Region to deploy AWS resources to"
+}

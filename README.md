@@ -35,6 +35,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_aws_provider_region"></a> [aws\_provider\_region](#input\_aws\_provider\_region) | Region to deploy AWS resources to | `string` | n/a | yes |
 | <a name="input_dead_letter_config"></a> [dead\_letter\_config](#input\_dead\_letter\_config) | n/a | <pre>object({<br>    target_arn = string<br>  })</pre> | `null` | no |
 | <a name="input_handler_entrypoint"></a> [handler\_entrypoint](#input\_handler\_entrypoint) | Function entrypoint for the handler | `string` | n/a | yes |
 | <a name="input_handler_filepath"></a> [handler\_filepath](#input\_handler\_filepath) | Path to the script to be run with lambda | `string` | n/a | yes |
