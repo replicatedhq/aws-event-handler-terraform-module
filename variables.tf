@@ -8,7 +8,7 @@ variable "owner" {
   description = "Owner of the service"
 }
 
-variable "handler_filepath" {
+variable "handler_path" {
   type        = string
   description = "Path to the script to be run with lambda "
 }
