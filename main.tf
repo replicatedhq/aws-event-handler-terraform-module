@@ -97,7 +97,7 @@ resource "aws_lambda_function" "handler_lambda" {
     }
   }
 
-  layers = var.event_handler_lambda_layers
+  layers = var.handler_lambda_layers
 
   tags = {
     owner      = var.owner
