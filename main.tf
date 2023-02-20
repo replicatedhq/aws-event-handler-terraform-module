@@ -39,34 +39,30 @@ resource "aws_iam_role_policy" "event_handler_lambda_iam_role_policy" {
   name = "event_handler_lambda_iam_role_policy-${var.name}"
   role = aws_iam_role.event_handler_lambda_iam_role.id
 
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        "Effect" : "Allow",
-        "Action" : "lambda:InvokeFunction",
-        "Resource" : aws_lambda_function.handler_lambda.arn
-      },
-      {
-        "Effect" : "Allow",
-        "Action" : [
-          "logs:PutLogEvents",
-          "logs:CreateLogStream",
-          "logs:CreateLogGroup"
-        ],
-        "Resource" : "*"
-      },
-      {
-        "Effect" : "Allow",
-        "Action" : [
-          "sqs:*"
-        ],
-        "Resource" : aws_sqs_queue.event_sqs_queue.arn
-      }
-    ]
-  })
-
+  policy     = data.aws_iam_policy_document.policy.json
   depends_on = [resource.aws_lambda_function.handler_lambda, resource.aws_sqs_queue.event_sqs_queue]
+}
+
+data "aws_iam_policy_document" "policy" {
+
+  statement {
+    actions   = ["lambda:InvokeFunction"]
+    resources = [aws_lambda_function.handler_lambda.arn]
+  }
+  statement {
+    actions = [
+      "logs:PutLogEvents",
+      "logs:CreateLogStream",
+      "logs:CreateLogGroup"
+    ]
+    resources = ["*"]
+  }
+  statement {
+    actions = [
+      "sqs:*"
+    ]
+    resources = [aws_sqs_queue.event_sqs_queue.arn]
+  }
 }
 
 resource "aws_lambda_function" "handler_lambda" {
@@ -100,6 +96,8 @@ resource "aws_lambda_function" "handler_lambda" {
       security_group_ids = vpc_config.value.security_group_ids
     }
   }
+
+  layers = var.handler_lambda_layers
 
   tags = {
     owner      = var.owner

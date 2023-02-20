@@ -49,3 +49,9 @@ variable "lambda_concurrent_executions" {
   default     = -1
   description = "Limit the number of concurrent executions of the lambda function. -1 removes any concurrency limitations"
 }
+
+variable "handler_lambda_layers" {
+  type        = list(any)
+  default     = null
+  description = "list of ARNs for layers to include with lambda function"
+}

@@ -30,12 +30,14 @@ No modules.
 | [aws_sqs_queue.event_sqs_queue](https://registry.terraform.io/providers/hashicorp/aws/4.30.0/docs/resources/sqs_queue) | resource |
 | [null_resource.trigger](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [archive_file.handler_function_zip](https://registry.terraform.io/providers/hashicorp/archive/latest/docs/data-sources/file) | data source |
+| [aws_iam_policy_document.policy](https://registry.terraform.io/providers/hashicorp/aws/4.30.0/docs/data-sources/iam_policy_document) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_dead_letter_config"></a> [dead\_letter\_config](#input\_dead\_letter\_config) | n/a | <pre>object({<br>    target_arn = string<br>  })</pre> | `null` | no |
+| <a name="input_event_handler_lambda_layers"></a> [event\_handler\_lambda\_layers](#input\_event\_handler\_lambda\_layers) | list of ARNs for layers to include with lambda function | `list(any)` | `null` | no |
 | <a name="input_handler_entrypoint"></a> [handler\_entrypoint](#input\_handler\_entrypoint) | Function entrypoint for the handler | `string` | n/a | yes |
 | <a name="input_handler_path"></a> [handler\_path](#input\_handler\_path) | Path to the script to be run with lambda | `string` | n/a | yes |
 | <a name="input_handler_runtime"></a> [handler\_runtime](#input\_handler\_runtime) | Runtime that the handler function utilizes. e.g. python37, node16, etc | `string` | n/a | yes |
