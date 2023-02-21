@@ -106,7 +106,7 @@ resource "aws_lambda_function" "handler_lambda" {
 }
 
 resource "aws_sqs_queue" "event_sqs_queue" {
-  name = "event-handler-${var.name}"
+  name = "event-handler-${var.name}.fifo"
 
   kms_master_key_id = var.kms_master_key_id == "" ? null : var.kms_master_key_id
   fifo_queue        = true
