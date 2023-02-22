@@ -37,8 +37,8 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_dead_letter_config"></a> [dead\_letter\_config](#input\_dead\_letter\_config) | n/a | <pre>object({<br>    target_arn = string<br>  })</pre> | `null` | no |
-| <a name="input_event_handler_lambda_layers"></a> [event\_handler\_lambda\_layers](#input\_event\_handler\_lambda\_layers) | list of ARNs for layers to include with lambda function | `list(any)` | `null` | no |
 | <a name="input_handler_entrypoint"></a> [handler\_entrypoint](#input\_handler\_entrypoint) | Function entrypoint for the handler | `string` | n/a | yes |
+| <a name="input_handler_lambda_layers"></a> [handler\_lambda\_layers](#input\_handler\_lambda\_layers) | list of ARNs for layers to include with lambda function | `list(any)` | `null` | no |
 | <a name="input_handler_path"></a> [handler\_path](#input\_handler\_path) | Path to the script to be run with lambda | `string` | n/a | yes |
 | <a name="input_handler_runtime"></a> [handler\_runtime](#input\_handler\_runtime) | Runtime that the handler function utilizes. e.g. python37, node16, etc | `string` | n/a | yes |
 | <a name="input_kms_master_key_id"></a> [kms\_master\_key\_id](#input\_kms\_master\_key\_id) | KMS key for encrypting SQS queue | `string` | `""` | no |
