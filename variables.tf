@@ -55,3 +55,9 @@ variable "handler_lambda_layers" {
   default     = null
   description = "list of ARNs for layers to include with lambda function"
 }
+
+variable "lambda_timeout" {
+  type        = number
+  default     = 3
+  description = "Amount of time your Lambda Function has to run in seconds"
+}

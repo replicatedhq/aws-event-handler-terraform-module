@@ -43,6 +43,7 @@ No modules.
 | <a name="input_handler_runtime"></a> [handler\_runtime](#input\_handler\_runtime) | Runtime that the handler function utilizes. e.g. python37, node16, etc | `string` | n/a | yes |
 | <a name="input_kms_master_key_id"></a> [kms\_master\_key\_id](#input\_kms\_master\_key\_id) | KMS key for encrypting SQS queue | `string` | `""` | no |
 | <a name="input_lambda_concurrent_executions"></a> [lambda\_concurrent\_executions](#input\_lambda\_concurrent\_executions) | Limit the number of concurrent executions of the lambda function. -1 removes any concurrency limitations | `number` | `-1` | no |
+| <a name="input_lambda_timeout"></a> [lambda\_timeout](#input\_lambda\_timeout) | Amount of time your Lambda Function has to run in seconds | `number` | `3` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name of the service | `string` | n/a | yes |
 | <a name="input_owner"></a> [owner](#input\_owner) | Owner of the service | `string` | n/a | yes |
 | <a name="input_vpc_config"></a> [vpc\_config](#input\_vpc\_config) | n/a | <pre>object({<br>    security_group_ids = list(string)<br>    subnet_ids         = list(string)<br>  })</pre> | `null` | no |
