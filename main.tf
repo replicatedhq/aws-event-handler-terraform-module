@@ -75,6 +75,7 @@ resource "aws_lambda_function" "handler_lambda" {
 
   runtime                        = var.handler_runtime
   reserved_concurrent_executions = var.lambda_concurrent_executions
+  timeout                        = var.lambda_timeout
 
   tracing_config {
     mode = "Active"
