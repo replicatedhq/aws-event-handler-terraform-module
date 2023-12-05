@@ -102,7 +102,7 @@ resource "aws_lambda_function" "handler_lambda" {
 
   tags = {
     owner      = var.owner
-    expires_at = "never"
+    expires-on = "never"
     managed-by = "terraform"
   }
 }
@@ -114,7 +114,7 @@ resource "aws_sqs_queue" "event_sqs_queue" {
 
   tags = {
     owner      = var.owner
-    expires_at = "never"
+    expires-on = "never"
     managed-by = "terraform"
   }
 }
